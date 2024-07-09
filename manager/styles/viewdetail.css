@@ -406,7 +406,7 @@ html {
   background-color: #ffffff;
   position: relative;
   margin: 10px;
-  flex: 0.7;
+  flex: 0.9;
   /* Adjust this value to make the left side smaller */
   border-radius: 20px;
   overflow: hidden;
@@ -417,7 +417,7 @@ html {
 
 .content-right-side {
   display: flex;
-  flex: 2.3;
+  flex: 2.1;
   /* Adjust this value to make the right side larger */
   flex-direction: column;
   margin: 10px;
@@ -651,7 +651,7 @@ html {
   margin: 0px;
   margin-top: 10px;
   position: absolute;
-  top: 750px;
+  top: 450px;
   width: 100%;
 }
 
