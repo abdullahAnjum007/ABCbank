@@ -21,7 +21,8 @@ body {
 }
 
 .sidebar {
-    width: 300px;
+    max-width: 250px;
+    width: 100%;
     background-color: #007438;
     color: #fff;
     padding: 20px;
@@ -84,7 +85,7 @@ body {
 
 @media (min-width: 1024px) {
     .menu-item a {
-        font-size: 12px;
+        font-size: 15px;
         /* Adjust font size for laptop screens */
     }
 
