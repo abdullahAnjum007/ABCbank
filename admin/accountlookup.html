@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .content {
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f0f0f0;
+            box-sizing: border-box;
+            overflow: auto;
+            /* Ensure scroll if content overflows */
+        }
+
+        .content h1 {
+            margin-top: 0;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .card-container {
+
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+            /* max-height: 500px; */
+            /* Adjust the maximum height as needed */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+
+        }
+
+        .card {
+            position: relative;
+            width: 90%;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            /* align-items: center; */
+            padding: 10px;
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .profile-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .profile-text {
+            flex-grow: 1;
+            margin-right: 20px;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            width: calc(100% - 100px);
+            /* Adjust width to accommodate profile image */
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .account-details {
+            margin-bottom: 10px;
+        }
+
+        .random-text {
+            margin-bottom: 10px;
+
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .card-button:nth-child(1) {
+            background-color: #7d3cff;
+            /* Purple background */
+            color: white;
+        }
+
+        .card-button:nth-child(2) {
+            background-color: #8cc63f;
+            /* Light green background */
+            color: #1f3615;
+            /* Dark green text */
+        }
+
+        .view-detail-button {
+            position: absolute;
+            top: 10px;
+            /* Adjust top position */
+            right: 10px;
+            /* Adjust right position */
+            background-color: transparent;
+            color: #8cc63f;
+            /* Light green text */
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .view-detail-button:hover {
+            text-decoration: underline;
+            background-color: transparent;
+        }
+
+        .card-footer {
+            position: absolute;
+            bottom: 10px;
+            /* Adjust top position */
+            right: 10px;
+            /* Adjust right position */
+            background-color: transparent;
+            color: #070707;
+            /* Light green text */
+            border: none;
+        }
+
+        .card-footer .footer-line1 {
+            font-weight: bold;
+            /* Example style for the first line */
+        }
+
+        .card-footer .footer-line2 {
+            color: #666;
+            /* Example style for the second line */
+            font-size: 14px;
+            /* Example font size */
+        }
+
+        .content-search-box {
+            width: 100%;
+            padding: 10px;
+            height: 30px;
+            font-size: 16px;
+            border-radius: 15px;
+            background-color: #EFF0F1;
+            border: 1px solid #3a3a3a;
+
+        }
+
+        .content-search-box:focus {
+            outline: none;
+            /* border: none; */
+
+
+        }
+
+
+        /*  */
+        .unique-card-container {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .unique-card {
+            flex-direction: column;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: flex;
+            width: 90%;
+            /* align-items: center; */
+            padding: 10px;
+        }
+
+        .unique-card:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            margin-left: 10px;
+        }
+
+        .unique-card-content {
+            display: flex;
+            /* flex-direction: column; */
+            width: 18%;
+            align-items: center;
+        }
+
+
+        .unique-profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .unique-profile-details {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            /* Center the text */
+            text-align: left;
+            /* Center the text horizontally */
+        }
+
+        .unique-profile-text {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .unique-account-details {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .unique-additional-text {
+            margin-top: 10px;
+            /* Add margin above the additional text */
+            font-size: 20px;
+            color: #000;
+            font-weight: 700;
+        }
+
+        /*  */
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* justify-content: space-between; */
+            margin-top: 20px;
+            width: 90%;
+            /* Adjust margin as needed */
+        }
+
+        .custom-button {
+            width: 17%;
+            /* height: 69px; */
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #ffffff;
+            /* Adjust background color */
+            border: 1px solid #ccc;
+            /* Adjust border */
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .custom-button:hover {
+            background-color: #f2fdf2;
+            /* Adjust hover background color */
+        }
+
+        .button-icon {
+            width: 40px;
+            height: 40px;
+            /* Adjust icon size */
+        }
+
+        .button-text {
+            flex-grow: 1;
+            margin-left: 10px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+        }
+
+        /*  */
+        /*  */
+        .account-count {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            padding: 10px;
+            /* Add padding for better spacing */
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            background-color: #007438;
+            /* Green circle color */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-right: 10px;
+            /* Adjust spacing */
+            flex-shrink: 0;
+            /* Prevents the circle from shrinking */
+        }
+
+        /*  */
+        .profile {
+            display: flex;
+            align-items: center;
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 10px 5px;
+        }
+
+        .profile img {
+            padding-right: 5px;
+        }
+
+        .profile-main {
+            text-align: left;
+        }
+
+        .profile p {
+            margin: 0px;
+            font-size: 15px;
+        }
+
+        .nav-detail {
+            margin-bottom: 10%;
+        }
+
+        .nav-detail p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .nav-detail p object {
+            padding-right: 10px;
+            height: 25px;
+            width: 25px;
+        }
+
+        /* .unique-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        } */
+
+        .unique-profile-image {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .account-container a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /*  */
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="../admin/assets/logo.png" alt="Bank ABC Logo">
+            </div>
+            <ul class="menu">
+                <li class="menu-item "><a href="dashboard.html"><img src="assets/side/image 1.png" alt="">Dashboard</a>
+                </li>
+                <li class="menu-item"><a href="branches.html"><img src="assets/side/image 5.png" alt="">Branches</a>
+                </li>
+                <li class="menu-item"><a href="Employees.html"><img src="assets/side/image 10.png" alt="">Employees</a>
+                </li>
+                <li class="menu-item"><a href="Accounts.html"><img src="assets/side/image 3acc.png" alt="">Accounts</a>
+                </li>
+                <li class="menu-item"><a href="Customer Support.html"><img src="assets/side/image 10 (1).png"
+                            alt="">Customer Support</a></li>
+                <li class="menu-item"><a href="Transactions.html"><img src="assets/side/image 10 (2).png"
+                            alt="">Transactions</a></li>
+                <li class="menu-item"><a href="Currencyexchange.html"><img src="assets/side/image 10 (3).png"
+                            alt="">Currency Exchange</a></li>
+                <li class="menu-item"><a href="transferglobally.html"><img src="assets/side/image 10 (4).png"
+                            alt="">Transfer Globally</a></li>
+                <li class="menu-item"><a href="document.html"><img src="assets/side/image 10 (5).png"
+                            alt="">Documents</a></li>
+            </ul>
+
+
+            <div class="profile">
+                <img src="assets/side/image 15.png" alt="">
+                <div class="profile-main">
+
+                    <p>Profile</p>
+                    <p>Abdul Ahad (Admin)</p>
+                </div>
+            </div>
+            <div class="nav-detail">
+                <p><object data="assets/Ellipse 1064reddot.svg" type="image/svg+xml"></object> Employee Account</p>
+                <p><object data="assets/Ellipse 1064bluedot.svg" type="image/svg+xml"></object>Shared Account (Bank ABC)
+                </p>
+            </div>
+
+            <div class="logout" onclick="logout()">
+                <button><img src="assets/image 15 (1).png" alt="">Logout</button>
+            </div>
+        </nav>
+        <main class="main-content">
+            <header class="header">
+                <div class="admin-info">
+                    <h3>Admin Panel, ABC Bank</h1>
+                        <p>04 March 2024 | 4:31 PM</p>
+                </div>
+                <div class="actions">
+                    <a href="Customer Support.html">
+                        <img draggable="false" class="action-img-1" src="assets/Group 28.png" alt=""></a>
+                    <input type="search" class="action-search" placeholder="Search...">
+                    <button class="audit-btn"><img src="assets/image 24.png" alt=""> Audit</button>
+                </div>
+            </header>
+
+            <div class="content">
+                <h1>Account Lookup</h1>
+                <p>Here is the comprehensive overview of account metrics available for analysis.</p>
+                <div class="search-bar-container">
+                    <input type="text" class="content-search-box" placeholder="Search Accounts.">
+                </div>
+                <div class="button-container">
+                    <div class="custom-button" id="account-number-button">
+                        <img src="assets/Acc (4).png" alt="Icon 1" class="button-icon">
+                        <span class="button-text">Account number</span>
+                    </div>
+                    <div class="custom-button" id="account-number-button2">
+                        <img src="assets/d (2).png" alt="Icon 2" class="button-icon">
+                        <span class="button-text">Name</span>
+                    </div>
+                    <div class="custom-button" id="account-number-button3">
+                        <img src="assets/Vector.svg" alt="Icon 3" class="button-icon">
+                        <span class="button-text">Phone number</span>
+                    </div>
+                    <div class="custom-button" id="account-number-button4">
+                        <img src="assets/mail.svg" alt="Icon 4" class="button-icon">
+                        <span class="button-text">Email</span>
+                    </div>
+                    <div class="custom-button" id="bycard-button">
+                        <img src="assets/Vector (1).svg" alt="Icon 5" class="button-icon">
+                        <span class="button-text">By card</span>
+                    </div>
+                </div>
+                <!-- accounts count -->
+                <div class="account-count">
+                    <div class="circle" id="account-count">0</div>
+                    <h1>Account</h1>
+                </div>
+
+                <div class="account-container" id="account-container">
+
+                    <!-- User cards will be dynamically added here -->
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <script>
+        document.getElementById('bell-icon-button').addEventListener('click', function () {
+            window.location.href = 'notification.html';
+        });
+
+        document.getElementById('bycard-button').addEventListener('click', function () {
+            window.location.href = 'bycard.html';
+        });
+        document.getElementById('account-number-button').addEventListener('click', function () {
+            window.location.href = 'accountnumber.html';
+        });
+        document.getElementById('account-number-button2').addEventListener('click', function () {
+            window.location.href = 'Name.html';
+        });
+        document.getElementById('account-number-button3').addEventListener('click', function () {
+            window.location.href = 'PhoneNumber.html';
+        });
+        document.getElementById('account-number-button4').addEventListener('click', function () {
+            window.location.href = 'Email.html';
+        });
+        function navigateToLoginPage() {
+            window.location.href = 'login.html';
+        }
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addUserCard(user) {
+                const cardContainer = document.getElementById('account-container');
+                const card = document.createElement('a');
+                card.href = `viewdetail.html?userId=${user.userId}`;
+                card.className = 'unique-card';
+                card.innerHTML = `
+                <div class="unique-card-content">
+            <img src="assets/ellipse.png" alt="Profile Image" class="unique-profile-image">
+            <div class="unique-profile-details">
+                <div class="unique-profile-text">${user.name}</div>
+                <div class="unique-account-details">Account Number: ${user.userId}</div>
+            </div>
+        </div>
+        <div class="unique-additional-text">Balance: ${user.balance}</div>
+                `;
+                cardContainer.appendChild(card);
+            }
+
+            function updateAccountCount() {
+                const users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+                const count = users.length;
+                document.getElementById('account-count').textContent = count;
+            }
+
+            function loadUsers() {
+                const users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+                users.forEach(user => addUserCard(user));
+                updateAccountCount();
+            }
+
+            loadUsers();
+        });
+    </script>
+    <script>
+        function logout() {
+            window.location.href = '../index.html'; // Replace with the actual URL of the new account page
+        }
+    </script>
+</body>
+
+</html>
