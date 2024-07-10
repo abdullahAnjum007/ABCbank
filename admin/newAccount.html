@@ -488,7 +488,7 @@
                         </div>
                         <!-- Submit Button -->
                         <div class="form-group form-group-full">
-                            <button type="submit" id="Submit-btn">Next</button>
+                            <button type="submit" id="Submit-btn" onclick="go()">Next</button>
                         </div>
                 </div>
             </div>
@@ -650,6 +650,9 @@
     <script>
         function logout() {
             window.location.href = '../index.html'; // Replace with the actual URL of the new account page
+        }
+        function go() {
+            window.location.href = 'uploadDocument.html'; // Replace with the actual URL of the new account page
         }
     </script>
 </body>
