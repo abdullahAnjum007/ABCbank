@@ -454,23 +454,23 @@
                     <input type="text" class="content-search-box" placeholder="Search Accounts.">
                 </div>
                 <div class="button-container">
-                    <div class="custom-button" id="account-number-button">
-                        <img src="assets/Acc (4).png" alt="Icon 1" class="button-icon">
+                    <div class="custom-button" id="account-number-button" onclick="openAccountNumber()">
+                        <img src="assets/Acc (4).png" alt="Icon 1" class="button-icon" >
                         <span class="button-text">Account number</span>
                     </div>
-                    <div class="custom-button" id="account-number-button2">
+                    <div class="custom-button" id="account-number-button2" onclick="openName()">
                         <img src="assets/d (2).png" alt="Icon 2" class="button-icon">
                         <span class="button-text">Name</span>
                     </div>
-                    <div class="custom-button" id="account-number-button3">
+                    <div class="custom-button" id="account-number-button3" onclick="openPhoneNumber()">
                         <img src="assets/Vector.svg" alt="Icon 3" class="button-icon">
                         <span class="button-text">Phone number</span>
                     </div>
-                    <div class="custom-button" id="account-number-button4">
+                    <div class="custom-button" id="account-number-button4" onclick="openEmail()">
                         <img src="assets/mail.svg" alt="Icon 4" class="button-icon">
                         <span class="button-text">Email</span>
                     </div>
-                    <div class="custom-button" id="bycard-button">
+                    <div class="custom-button" id="bycard-button" onclick="openBycard()">
                         <img src="assets/Vector (1).svg" alt="Icon 5" class="button-icon">
                         <span class="button-text">By card</span>
                     </div>
@@ -488,6 +488,7 @@
             </div>
 
 
+
         </main>
     </div>
     <script src="scripts.js"></script>
@@ -496,21 +497,25 @@
             window.location.href = 'notification.html';
         });
 
-        document.getElementById('bycard-button').addEventListener('click', function () {
+        function navigateToLoginPage() {
+            window.location.href = 'login.html';
+        }
+        function openBycard() {
             window.location.href = 'bycard.html';
-        });
-        document.getElementById('account-number-button').addEventListener('click', function () {
-            window.location.href = 'accountnumber.html';
-        });
-        document.getElementById('account-number-button2').addEventListener('click', function () {
-            window.location.href = 'Name.html';
-        });
-        document.getElementById('account-number-button3').addEventListener('click', function () {
-            window.location.href = 'PhoneNumber.html';
-        });
-        document.getElementById('account-number-button4').addEventListener('click', function () {
+        }
+        function openEmail() {
             window.location.href = 'Email.html';
-        });
+        }
+        function openPhoneNumber() {
+            window.location.href = 'PhoneNumber.html';
+        }
+        function openName() {
+            window.location.href = 'Name.html';
+        }
+        function openAccountNumber() {
+            window.location.href = 'accountnumber.html';
+        }
+
         function navigateToLoginPage() {
             window.location.href = 'login.html';
         }
