@@ -233,7 +233,7 @@ body {
 
 .stats {
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     gap: 20px;
     justify-content: flex-start;
     margin: 20px 0;
@@ -1495,8 +1495,8 @@ h2-branchdetail {
 
 .card-container-accdash {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    /* flex-wrap: wrap; */
+    gap: 20px;
     justify-content: space-around;
     margin-top: 20px;
     width: 65%;
